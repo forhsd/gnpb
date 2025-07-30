@@ -1,0 +1,79 @@
+package gnpb
+
+import (
+	"database/sql/driver"
+	"errors"
+	"fmt"
+
+	"github.com/bytedance/sonic"
+)
+
+/*begin *RunStatus*/
+func (s *RunStatus) Scan(value any) error {
+
+	if value == nil {
+		return nil
+	}
+
+	b, ok := value.(int64)
+	if !ok {
+		return fmt.Errorf("value is not []byte, value: %v", value)
+	}
+
+	*s = RunStatus(b)
+	return nil
+}
+
+func (s *RunStatus) Value() (driver.Value, error) {
+
+	if s == nil {
+		return nil, nil
+	}
+
+	return int(*s), nil
+}
+
+/*end *RunStatus*/
+
+/*begin *RelationElement*/
+
+func (*RelationElement) GormDataType() string {
+	return "jsonb"
+}
+
+func (x *RelationElement) Value() (driver.Value, error) {
+
+	// Convert the map to JSON
+	jsonData, err := sonic.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+
+	return string(jsonData), nil
+}
+
+func (x *RelationElement) Scan(value any) error {
+
+	if value == nil {
+		return nil
+	}
+
+	// Check the type of the value
+	var bytes []byte
+	switch v := value.(type) {
+	case []byte:
+		bytes = v
+	case string:
+		bytes = []byte(v)
+	default:
+		return errors.New("type assertion to []byte or string failed")
+	}
+
+	if err := sonic.Unmarshal(bytes, x); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+/*end *RelationElement*/
