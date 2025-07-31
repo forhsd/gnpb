@@ -77,3 +77,30 @@ func (x *RelationElement) Scan(value any) error {
 }
 
 /*end *RelationElement*/
+
+/*begin *DBType*/
+func (s *DBType) Scan(value any) error {
+
+	if value == nil {
+		return nil
+	}
+
+	b, ok := value.(int64)
+	if !ok {
+		return fmt.Errorf("value is not int64, value: %v", value)
+	}
+
+	*s = DBType(b)
+	return nil
+}
+
+func (s *DBType) Value() (driver.Value, error) {
+
+	if s == nil {
+		return nil, nil
+	}
+
+	return int(*s), nil
+}
+
+/*end *DBType*/

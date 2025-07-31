@@ -25,6 +25,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type DBType int32
+
+const (
+	DBType_DB_TYPE_UNSPECIFIED DBType = 0
+	DBType_DB_TYPE_POSTGRES    DBType = 1
+	DBType_DB_TYPE_MYSQL       DBType = 2
+	DBType_DB_TYPE_DORIS       DBType = 3
+)
+
+// Enum value maps for DBType.
+var (
+	DBType_name = map[int32]string{
+		0: "DB_TYPE_UNSPECIFIED",
+		1: "DB_TYPE_POSTGRES",
+		2: "DB_TYPE_MYSQL",
+		3: "DB_TYPE_DORIS",
+	}
+	DBType_value = map[string]int32{
+		"DB_TYPE_UNSPECIFIED": 0,
+		"DB_TYPE_POSTGRES":    1,
+		"DB_TYPE_MYSQL":       2,
+		"DB_TYPE_DORIS":       3,
+	}
+)
+
+func (x DBType) Enum() *DBType {
+	p := new(DBType)
+	*p = x
+	return p
+}
+
+func (x DBType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DBType) Descriptor() protoreflect.EnumDescriptor {
+	return file_internal_proto_enumTypes[0].Descriptor()
+}
+
+func (DBType) Type() protoreflect.EnumType {
+	return &file_internal_proto_enumTypes[0]
+}
+
+func (x DBType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DBType.Descriptor instead.
+func (DBType) EnumDescriptor() ([]byte, []int) {
+	return file_internal_proto_rawDescGZIP(), []int{0}
+}
+
 // 运行状态
 type RunStatus int32
 
@@ -71,11 +123,11 @@ func (x RunStatus) String() string {
 }
 
 func (RunStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_internal_proto_enumTypes[0].Descriptor()
+	return file_internal_proto_enumTypes[1].Descriptor()
 }
 
 func (RunStatus) Type() protoreflect.EnumType {
-	return &file_internal_proto_enumTypes[0]
+	return &file_internal_proto_enumTypes[1]
 }
 
 func (x RunStatus) Number() protoreflect.EnumNumber {
@@ -84,7 +136,7 @@ func (x RunStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RunStatus.Descriptor instead.
 func (RunStatus) EnumDescriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{0}
+	return file_internal_proto_rawDescGZIP(), []int{1}
 }
 
 // 关系类型
@@ -124,11 +176,11 @@ func (x RelationType) String() string {
 }
 
 func (RelationType) Descriptor() protoreflect.EnumDescriptor {
-	return file_internal_proto_enumTypes[1].Descriptor()
+	return file_internal_proto_enumTypes[2].Descriptor()
 }
 
 func (RelationType) Type() protoreflect.EnumType {
-	return &file_internal_proto_enumTypes[1]
+	return &file_internal_proto_enumTypes[2]
 }
 
 func (x RelationType) Number() protoreflect.EnumNumber {
@@ -137,7 +189,7 @@ func (x RelationType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RelationType.Descriptor instead.
 func (RelationType) EnumDescriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{1}
+	return file_internal_proto_rawDescGZIP(), []int{2}
 }
 
 type UnionRelation struct {
@@ -148,6 +200,8 @@ type UnionRelation struct {
 	Schema        string                 `protobuf:"bytes,4,opt,name=schema,proto3" json:"schema,omitempty"`
 	Table         string                 `protobuf:"bytes,5,opt,name=table,proto3" json:"table,omitempty"`
 	Type          string                 `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
+	DbType        DBType                 `protobuf:"varint,7,opt,name=db_type,json=dbType,proto3,enum=gnpb.DBType" json:"db_type,omitempty"`
+	Description   string                 `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -220,6 +274,20 @@ func (x *UnionRelation) GetTable() string {
 func (x *UnionRelation) GetType() string {
 	if x != nil {
 		return x.Type
+	}
+	return ""
+}
+
+func (x *UnionRelation) GetDbType() DBType {
+	if x != nil {
+		return x.DbType
+	}
+	return DBType_DB_TYPE_UNSPECIFIED
+}
+
+func (x *UnionRelation) GetDescription() string {
+	if x != nil {
+		return x.Description
 	}
 	return ""
 }
@@ -644,14 +712,16 @@ var File_internal_proto protoreflect.FileDescriptor
 
 const file_internal_proto_rawDesc = "" +
 	"\n" +
-	"\x0einternal.proto\x12\x04gnpb\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a google/protobuf/descriptor.proto\x1a\x17validate/validate.proto\"\x92\x01\n" +
+	"\x0einternal.proto\x12\x04gnpb\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a google/protobuf/descriptor.proto\x1a\x17validate/validate.proto\"\xdb\x01\n" +
 	"\rUnionRelation\x12\x12\n" +
 	"\x04host\x18\x01 \x01(\tR\x04host\x12\x12\n" +
 	"\x04port\x18\x02 \x01(\x05R\x04port\x12\x17\n" +
 	"\adb_name\x18\x03 \x01(\tR\x06dbName\x12\x16\n" +
 	"\x06schema\x18\x04 \x01(\tR\x06schema\x12\x14\n" +
 	"\x05table\x18\x05 \x01(\tR\x05table\x12\x12\n" +
-	"\x04type\x18\x06 \x01(\tR\x04type\"t\n" +
+	"\x04type\x18\x06 \x01(\tR\x04type\x12%\n" +
+	"\adb_type\x18\a \x01(\x0e2\f.gnpb.DBTypeR\x06dbType\x12 \n" +
+	"\vdescription\x18\b \x01(\tR\vdescription\"t\n" +
 	"\x16LineageRelationRequest\x12-\n" +
 	"\asources\x18\x01 \x03(\v2\x13.gnpb.UnionRelationR\asources\x12+\n" +
 	"\x06target\x18\x02 \x01(\v2\x13.gnpb.UnionRelationR\x06target\"\x19\n" +
@@ -682,7 +752,12 @@ const file_internal_proto_rawDesc = "" +
 	"columnHash\"q\n" +
 	"\rTableRelation\x12/\n" +
 	"\asources\x18\x01 \x03(\v2\x15.gnpb.RelationElementR\asources\x12/\n" +
-	"\atargets\x18\x02 \x03(\v2\x15.gnpb.RelationElementR\atargets*b\n" +
+	"\atargets\x18\x02 \x03(\v2\x15.gnpb.RelationElementR\atargets*]\n" +
+	"\x06DBType\x12\x17\n" +
+	"\x13DB_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
+	"\x10DB_TYPE_POSTGRES\x10\x01\x12\x11\n" +
+	"\rDB_TYPE_MYSQL\x10\x02\x12\x11\n" +
+	"\rDB_TYPE_DORIS\x10\x03*b\n" +
 	"\tRunStatus\x12\v\n" +
 	"\aUnknown\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -718,38 +793,40 @@ func file_internal_proto_rawDescGZIP() []byte {
 	return file_internal_proto_rawDescData
 }
 
-var file_internal_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_internal_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_internal_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_internal_proto_goTypes = []any{
-	(RunStatus)(0),                  // 0: gnpb.RunStatus
-	(RelationType)(0),               // 1: gnpb.RelationType
-	(*UnionRelation)(nil),           // 2: gnpb.UnionRelation
-	(*LineageRelationRequest)(nil),  // 3: gnpb.LineageRelationRequest
-	(*LineageRelationResponse)(nil), // 4: gnpb.LineageRelationResponse
-	(*GetPayloadRequest)(nil),       // 5: gnpb.GetPayloadRequest
-	(*GetPayloadResponse)(nil),      // 6: gnpb.GetPayloadResponse
-	(*LifecycleEventRequest)(nil),   // 7: gnpb.LifecycleEventRequest
-	(*LifecycleEventResponse)(nil),  // 8: gnpb.LifecycleEventResponse
-	(*RelationElement)(nil),         // 9: gnpb.RelationElement
-	(*TableRelation)(nil),           // 10: gnpb.TableRelation
+	(DBType)(0),                     // 0: gnpb.DBType
+	(RunStatus)(0),                  // 1: gnpb.RunStatus
+	(RelationType)(0),               // 2: gnpb.RelationType
+	(*UnionRelation)(nil),           // 3: gnpb.UnionRelation
+	(*LineageRelationRequest)(nil),  // 4: gnpb.LineageRelationRequest
+	(*LineageRelationResponse)(nil), // 5: gnpb.LineageRelationResponse
+	(*GetPayloadRequest)(nil),       // 6: gnpb.GetPayloadRequest
+	(*GetPayloadResponse)(nil),      // 7: gnpb.GetPayloadResponse
+	(*LifecycleEventRequest)(nil),   // 8: gnpb.LifecycleEventRequest
+	(*LifecycleEventResponse)(nil),  // 9: gnpb.LifecycleEventResponse
+	(*RelationElement)(nil),         // 10: gnpb.RelationElement
+	(*TableRelation)(nil),           // 11: gnpb.TableRelation
 }
 var file_internal_proto_depIdxs = []int32{
-	2, // 0: gnpb.LineageRelationRequest.sources:type_name -> gnpb.UnionRelation
-	2, // 1: gnpb.LineageRelationRequest.target:type_name -> gnpb.UnionRelation
-	0, // 2: gnpb.LifecycleEventRequest.run_status:type_name -> gnpb.RunStatus
-	9, // 3: gnpb.TableRelation.sources:type_name -> gnpb.RelationElement
-	9, // 4: gnpb.TableRelation.targets:type_name -> gnpb.RelationElement
-	5, // 5: gnpb.InternalService.GetPayload:input_type -> gnpb.GetPayloadRequest
-	7, // 6: gnpb.InternalService.LifecycleEvent:input_type -> gnpb.LifecycleEventRequest
-	3, // 7: gnpb.InternalService.LineageRelation:input_type -> gnpb.LineageRelationRequest
-	6, // 8: gnpb.InternalService.GetPayload:output_type -> gnpb.GetPayloadResponse
-	8, // 9: gnpb.InternalService.LifecycleEvent:output_type -> gnpb.LifecycleEventResponse
-	4, // 10: gnpb.InternalService.LineageRelation:output_type -> gnpb.LineageRelationResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	0,  // 0: gnpb.UnionRelation.db_type:type_name -> gnpb.DBType
+	3,  // 1: gnpb.LineageRelationRequest.sources:type_name -> gnpb.UnionRelation
+	3,  // 2: gnpb.LineageRelationRequest.target:type_name -> gnpb.UnionRelation
+	1,  // 3: gnpb.LifecycleEventRequest.run_status:type_name -> gnpb.RunStatus
+	10, // 4: gnpb.TableRelation.sources:type_name -> gnpb.RelationElement
+	10, // 5: gnpb.TableRelation.targets:type_name -> gnpb.RelationElement
+	6,  // 6: gnpb.InternalService.GetPayload:input_type -> gnpb.GetPayloadRequest
+	8,  // 7: gnpb.InternalService.LifecycleEvent:input_type -> gnpb.LifecycleEventRequest
+	4,  // 8: gnpb.InternalService.LineageRelation:input_type -> gnpb.LineageRelationRequest
+	7,  // 9: gnpb.InternalService.GetPayload:output_type -> gnpb.GetPayloadResponse
+	9,  // 10: gnpb.InternalService.LifecycleEvent:output_type -> gnpb.LifecycleEventResponse
+	5,  // 11: gnpb.InternalService.LineageRelation:output_type -> gnpb.LineageRelationResponse
+	9,  // [9:12] is the sub-list for method output_type
+	6,  // [6:9] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_internal_proto_init() }
@@ -763,7 +840,7 @@ func file_internal_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_proto_rawDesc), len(file_internal_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
