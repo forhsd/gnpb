@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	InternalService_GetPayload_FullMethodName     = "/gnpb.InternalService/GetPayload"
-	InternalService_LifecycleEvent_FullMethodName = "/gnpb.InternalService/LifecycleEvent"
+	InternalService_GetPayload_FullMethodName      = "/gnpb.InternalService/GetPayload"
+	InternalService_LifecycleEvent_FullMethodName  = "/gnpb.InternalService/LifecycleEvent"
+	InternalService_LineageRelation_FullMethodName = "/gnpb.InternalService/LineageRelation"
 )
 
 // InternalServiceClient is the client API for InternalService service.
@@ -29,6 +30,7 @@ const (
 type InternalServiceClient interface {
 	GetPayload(ctx context.Context, in *GetPayloadRequest, opts ...grpc.CallOption) (*GetPayloadResponse, error)
 	LifecycleEvent(ctx context.Context, in *LifecycleEventRequest, opts ...grpc.CallOption) (*LifecycleEventResponse, error)
+	LineageRelation(ctx context.Context, in *LineageRelationRequest, opts ...grpc.CallOption) (*LineageRelationResponse, error)
 }
 
 type internalServiceClient struct {
@@ -59,12 +61,23 @@ func (c *internalServiceClient) LifecycleEvent(ctx context.Context, in *Lifecycl
 	return out, nil
 }
 
+func (c *internalServiceClient) LineageRelation(ctx context.Context, in *LineageRelationRequest, opts ...grpc.CallOption) (*LineageRelationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LineageRelationResponse)
+	err := c.cc.Invoke(ctx, InternalService_LineageRelation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InternalServiceServer is the server API for InternalService service.
 // All implementations must embed UnimplementedInternalServiceServer
 // for forward compatibility.
 type InternalServiceServer interface {
 	GetPayload(context.Context, *GetPayloadRequest) (*GetPayloadResponse, error)
 	LifecycleEvent(context.Context, *LifecycleEventRequest) (*LifecycleEventResponse, error)
+	LineageRelation(context.Context, *LineageRelationRequest) (*LineageRelationResponse, error)
 	mustEmbedUnimplementedInternalServiceServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedInternalServiceServer) GetPayload(context.Context, *GetPayloa
 }
 func (UnimplementedInternalServiceServer) LifecycleEvent(context.Context, *LifecycleEventRequest) (*LifecycleEventResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LifecycleEvent not implemented")
+}
+func (UnimplementedInternalServiceServer) LineageRelation(context.Context, *LineageRelationRequest) (*LineageRelationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LineageRelation not implemented")
 }
 func (UnimplementedInternalServiceServer) mustEmbedUnimplementedInternalServiceServer() {}
 func (UnimplementedInternalServiceServer) testEmbeddedByValue()                         {}
@@ -138,6 +154,24 @@ func _InternalService_LifecycleEvent_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InternalService_LineageRelation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LineageRelationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InternalServiceServer).LineageRelation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InternalService_LineageRelation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InternalServiceServer).LineageRelation(ctx, req.(*LineageRelationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InternalService_ServiceDesc is the grpc.ServiceDesc for InternalService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var InternalService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LifecycleEvent",
 			Handler:    _InternalService_LifecycleEvent_Handler,
+		},
+		{
+			MethodName: "LineageRelation",
+			Handler:    _InternalService_LineageRelation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
