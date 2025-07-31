@@ -60,15 +60,14 @@ func (c *internalServiceClient) LifecycleEvent(ctx context.Context, in *Lifecycl
 }
 
 // InternalServiceServer is the server API for InternalService service.
-// All implementations must embed UnimplementedInternalServiceServer
+// All implementations should embed UnimplementedInternalServiceServer
 // for forward compatibility.
 type InternalServiceServer interface {
 	GetPayload(context.Context, *GetPayloadRequest) (*GetPayloadResponse, error)
 	LifecycleEvent(context.Context, *LifecycleEventRequest) (*LifecycleEventResponse, error)
-	mustEmbedUnimplementedInternalServiceServer()
 }
 
-// UnimplementedInternalServiceServer must be embedded to have
+// UnimplementedInternalServiceServer should be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
@@ -81,8 +80,7 @@ func (UnimplementedInternalServiceServer) GetPayload(context.Context, *GetPayloa
 func (UnimplementedInternalServiceServer) LifecycleEvent(context.Context, *LifecycleEventRequest) (*LifecycleEventResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LifecycleEvent not implemented")
 }
-func (UnimplementedInternalServiceServer) mustEmbedUnimplementedInternalServiceServer() {}
-func (UnimplementedInternalServiceServer) testEmbeddedByValue()                         {}
+func (UnimplementedInternalServiceServer) testEmbeddedByValue() {}
 
 // UnsafeInternalServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to InternalServiceServer will

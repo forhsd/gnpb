@@ -519,8 +519,8 @@ const file_internal_proto_rawDesc = "" +
 	"\x0fInternalService\x12?\n" +
 	"\n" +
 	"GetPayload\x12\x17.gnpb.GetPayloadRequest\x1a\x18.gnpb.GetPayloadResponse\x12K\n" +
-	"\x0eLifecycleEvent\x12\x1b.gnpb.LifecycleEventRequest\x1a\x1c.gnpb.LifecycleEventResponseBH\n" +
-	"\x14com.otorp.grpc.protoB\x0fGovernanceProtoH\x01P\x01Z\x1bgithub.com/forhsd/gnpb;gnpbb\x06proto3"
+	"\x0eLifecycleEvent\x12\x1b.gnpb.LifecycleEventRequest\x1a\x1c.gnpb.LifecycleEventResponseBK\n" +
+	"\x14com.otorp.grpc.protoB\x0fGovernanceProtoH\x01P\x01Z\x1egithub.com/forhsd/gnpb/v1;gnpbb\x06proto3"
 
 var (
 	file_internal_proto_rawDescOnce sync.Once
