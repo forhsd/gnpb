@@ -194,14 +194,15 @@ func (RelationType) EnumDescriptor() ([]byte, []int) {
 
 type UnionRelation struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Host          string                 `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
-	Port          int32                  `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	DbName        string                 `protobuf:"bytes,3,opt,name=db_name,json=dbName,proto3" json:"db_name,omitempty"`
-	Schema        string                 `protobuf:"bytes,4,opt,name=schema,proto3" json:"schema,omitempty"`
-	Table         string                 `protobuf:"bytes,5,opt,name=table,proto3" json:"table,omitempty"`
-	Type          string                 `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
-	DbType        DBType                 `protobuf:"varint,7,opt,name=db_type,json=dbType,proto3,enum=gnpb.DBType" json:"db_type,omitempty"`
-	Description   string                 `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Host          string                 `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
+	Port          int32                  `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	DbName        string                 `protobuf:"bytes,4,opt,name=db_name,json=dbName,proto3" json:"db_name,omitempty"`
+	Schema        string                 `protobuf:"bytes,5,opt,name=schema,proto3" json:"schema,omitempty"`
+	Table         string                 `protobuf:"bytes,6,opt,name=table,proto3" json:"table,omitempty"`
+	Type          string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	DbType        DBType                 `protobuf:"varint,8,opt,name=db_type,json=dbType,proto3,enum=gnpb.DBType" json:"db_type,omitempty"`
+	Description   string                 `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -234,6 +235,13 @@ func (x *UnionRelation) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UnionRelation.ProtoReflect.Descriptor instead.
 func (*UnionRelation) Descriptor() ([]byte, []int) {
 	return file_internal_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *UnionRelation) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *UnionRelation) GetHost() string {
@@ -712,16 +720,17 @@ var File_internal_proto protoreflect.FileDescriptor
 
 const file_internal_proto_rawDesc = "" +
 	"\n" +
-	"\x0einternal.proto\x12\x04gnpb\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a google/protobuf/descriptor.proto\x1a\x17validate/validate.proto\"\xdb\x01\n" +
-	"\rUnionRelation\x12\x12\n" +
-	"\x04host\x18\x01 \x01(\tR\x04host\x12\x12\n" +
-	"\x04port\x18\x02 \x01(\x05R\x04port\x12\x17\n" +
-	"\adb_name\x18\x03 \x01(\tR\x06dbName\x12\x16\n" +
-	"\x06schema\x18\x04 \x01(\tR\x06schema\x12\x14\n" +
-	"\x05table\x18\x05 \x01(\tR\x05table\x12\x12\n" +
-	"\x04type\x18\x06 \x01(\tR\x04type\x12%\n" +
-	"\adb_type\x18\a \x01(\x0e2\f.gnpb.DBTypeR\x06dbType\x12 \n" +
-	"\vdescription\x18\b \x01(\tR\vdescription\"t\n" +
+	"\x0einternal.proto\x12\x04gnpb\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a google/protobuf/descriptor.proto\x1a\x17validate/validate.proto\"\xeb\x01\n" +
+	"\rUnionRelation\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04host\x18\x02 \x01(\tR\x04host\x12\x12\n" +
+	"\x04port\x18\x03 \x01(\x05R\x04port\x12\x17\n" +
+	"\adb_name\x18\x04 \x01(\tR\x06dbName\x12\x16\n" +
+	"\x06schema\x18\x05 \x01(\tR\x06schema\x12\x14\n" +
+	"\x05table\x18\x06 \x01(\tR\x05table\x12\x12\n" +
+	"\x04type\x18\a \x01(\tR\x04type\x12%\n" +
+	"\adb_type\x18\b \x01(\x0e2\f.gnpb.DBTypeR\x06dbType\x12 \n" +
+	"\vdescription\x18\t \x01(\tR\vdescription\"t\n" +
 	"\x16LineageRelationRequest\x12-\n" +
 	"\asources\x18\x01 \x03(\v2\x13.gnpb.UnionRelationR\asources\x12+\n" +
 	"\x06target\x18\x02 \x01(\v2\x13.gnpb.UnionRelationR\x06target\"\x19\n" +
