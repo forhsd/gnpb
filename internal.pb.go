@@ -29,24 +29,24 @@ type DBType int32
 
 const (
 	DBType_DB_TYPE_UNSPECIFIED DBType = 0
-	DBType_DB_TYPE_POSTGRES    DBType = 1
-	DBType_DB_TYPE_MYSQL       DBType = 2
-	DBType_DB_TYPE_DORIS       DBType = 3
+	DBType_postgres            DBType = 1
+	DBType_mysql               DBType = 2
+	DBType_doris               DBType = 3
 )
 
 // Enum value maps for DBType.
 var (
 	DBType_name = map[int32]string{
 		0: "DB_TYPE_UNSPECIFIED",
-		1: "DB_TYPE_POSTGRES",
-		2: "DB_TYPE_MYSQL",
-		3: "DB_TYPE_DORIS",
+		1: "postgres",
+		2: "mysql",
+		3: "doris",
 	}
 	DBType_value = map[string]int32{
 		"DB_TYPE_UNSPECIFIED": 0,
-		"DB_TYPE_POSTGRES":    1,
-		"DB_TYPE_MYSQL":       2,
-		"DB_TYPE_DORIS":       3,
+		"postgres":            1,
+		"mysql":               2,
+		"doris":               3,
 	}
 )
 
@@ -761,12 +761,12 @@ const file_internal_proto_rawDesc = "" +
 	"columnHash\"q\n" +
 	"\rTableRelation\x12/\n" +
 	"\asources\x18\x01 \x03(\v2\x15.gnpb.RelationElementR\asources\x12/\n" +
-	"\atargets\x18\x02 \x03(\v2\x15.gnpb.RelationElementR\atargets*]\n" +
+	"\atargets\x18\x02 \x03(\v2\x15.gnpb.RelationElementR\atargets*E\n" +
 	"\x06DBType\x12\x17\n" +
-	"\x13DB_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
-	"\x10DB_TYPE_POSTGRES\x10\x01\x12\x11\n" +
-	"\rDB_TYPE_MYSQL\x10\x02\x12\x11\n" +
-	"\rDB_TYPE_DORIS\x10\x03*b\n" +
+	"\x13DB_TYPE_UNSPECIFIED\x10\x00\x12\f\n" +
+	"\bpostgres\x10\x01\x12\t\n" +
+	"\x05mysql\x10\x02\x12\t\n" +
+	"\x05doris\x10\x03*b\n" +
 	"\tRunStatus\x12\v\n" +
 	"\aUnknown\x10\x00\x12\x0e\n" +
 	"\n" +
