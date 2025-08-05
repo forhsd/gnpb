@@ -4,8 +4,11 @@ import (
 	"database/sql/driver"
 	"errors"
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/bytedance/sonic"
+	"github.com/cespare/xxhash/v2"
 )
 
 /*begin *RunStatus*/
@@ -104,3 +107,48 @@ func (s *DBType) Value() (driver.Value, error) {
 }
 
 /*end *DBType*/
+
+func (s *UnionIdentifier) UnionHash() (string, error) {
+	var errs []error
+	if s.GetHost() == "" {
+		errs = append(errs, errors.New("host不能为空"))
+	}
+	if s.GetPort() < 1 {
+		errs = append(errs, errors.New("port不能为空"))
+	}
+	if s.GetDbType() < 1 {
+		errs = append(errs, errors.New("dbType不能为空"))
+	}
+	if s.GetDbName() == "" {
+		errs = append(errs, errors.New("dbName不能为空"))
+	}
+	if s.GetSchema() == "" {
+		errs = append(errs, errors.New("schema不能为空"))
+	}
+	if s.GetTable() == "" {
+		errs = append(errs, errors.New("table不能为空"))
+	}
+	return HashString(
+		s.GetHost(),
+		s.GetPort(),
+		s.GetDbType(),
+		s.GetDbName(),
+		s.GetSchema(),
+		s.GetTable(),
+	), errors.Join(errs...)
+}
+
+func Hash(item ...any) uint64 {
+
+	var arr []string
+	for _, val := range item {
+		arr = append(arr, fmt.Sprintf("%[1]T %+[1]v", val))
+	}
+
+	key := strings.Join(arr, ".")
+	return xxhash.Sum64([]byte(key))
+}
+
+func HashString(item ...any) string {
+	return strconv.FormatUint(Hash(item...), 10)
+}

@@ -300,6 +300,90 @@ func (x *UnionRelation) GetDescription() string {
 	return ""
 }
 
+type UnionIdentifier struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Host          string                 `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	Port          int32                  `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
+	DbType        DBType                 `protobuf:"varint,3,opt,name=db_type,json=dbType,proto3,enum=gnpb.DBType" json:"db_type,omitempty"`
+	DbName        string                 `protobuf:"bytes,4,opt,name=db_name,json=dbName,proto3" json:"db_name,omitempty"`
+	Schema        string                 `protobuf:"bytes,5,opt,name=schema,proto3" json:"schema,omitempty"`
+	Table         string                 `protobuf:"bytes,6,opt,name=table,proto3" json:"table,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnionIdentifier) Reset() {
+	*x = UnionIdentifier{}
+	mi := &file_internal_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnionIdentifier) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnionIdentifier) ProtoMessage() {}
+
+func (x *UnionIdentifier) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnionIdentifier.ProtoReflect.Descriptor instead.
+func (*UnionIdentifier) Descriptor() ([]byte, []int) {
+	return file_internal_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UnionIdentifier) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *UnionIdentifier) GetPort() int32 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *UnionIdentifier) GetDbType() DBType {
+	if x != nil {
+		return x.DbType
+	}
+	return DBType_DB_TYPE_UNSPECIFIED
+}
+
+func (x *UnionIdentifier) GetDbName() string {
+	if x != nil {
+		return x.DbName
+	}
+	return ""
+}
+
+func (x *UnionIdentifier) GetSchema() string {
+	if x != nil {
+		return x.Schema
+	}
+	return ""
+}
+
+func (x *UnionIdentifier) GetTable() string {
+	if x != nil {
+		return x.Table
+	}
+	return ""
+}
+
 type LineageRelationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Sources       []*UnionRelation       `protobuf:"bytes,1,rep,name=sources,proto3" json:"sources,omitempty"`
@@ -310,7 +394,7 @@ type LineageRelationRequest struct {
 
 func (x *LineageRelationRequest) Reset() {
 	*x = LineageRelationRequest{}
-	mi := &file_internal_proto_msgTypes[1]
+	mi := &file_internal_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -322,7 +406,7 @@ func (x *LineageRelationRequest) String() string {
 func (*LineageRelationRequest) ProtoMessage() {}
 
 func (x *LineageRelationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[1]
+	mi := &file_internal_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -335,7 +419,7 @@ func (x *LineageRelationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LineageRelationRequest.ProtoReflect.Descriptor instead.
 func (*LineageRelationRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{1}
+	return file_internal_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *LineageRelationRequest) GetSources() []*UnionRelation {
@@ -360,7 +444,7 @@ type LineageRelationResponse struct {
 
 func (x *LineageRelationResponse) Reset() {
 	*x = LineageRelationResponse{}
-	mi := &file_internal_proto_msgTypes[2]
+	mi := &file_internal_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -372,7 +456,7 @@ func (x *LineageRelationResponse) String() string {
 func (*LineageRelationResponse) ProtoMessage() {}
 
 func (x *LineageRelationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[2]
+	mi := &file_internal_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -385,7 +469,7 @@ func (x *LineageRelationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LineageRelationResponse.ProtoReflect.Descriptor instead.
 func (*LineageRelationResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{2}
+	return file_internal_proto_rawDescGZIP(), []int{3}
 }
 
 type GetPayloadRequest struct {
@@ -397,7 +481,7 @@ type GetPayloadRequest struct {
 
 func (x *GetPayloadRequest) Reset() {
 	*x = GetPayloadRequest{}
-	mi := &file_internal_proto_msgTypes[3]
+	mi := &file_internal_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -409,7 +493,7 @@ func (x *GetPayloadRequest) String() string {
 func (*GetPayloadRequest) ProtoMessage() {}
 
 func (x *GetPayloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[3]
+	mi := &file_internal_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -422,7 +506,7 @@ func (x *GetPayloadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPayloadRequest.ProtoReflect.Descriptor instead.
 func (*GetPayloadRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{3}
+	return file_internal_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetPayloadRequest) GetId() uint64 {
@@ -442,7 +526,7 @@ type GetPayloadResponse struct {
 
 func (x *GetPayloadResponse) Reset() {
 	*x = GetPayloadResponse{}
-	mi := &file_internal_proto_msgTypes[4]
+	mi := &file_internal_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -454,7 +538,7 @@ func (x *GetPayloadResponse) String() string {
 func (*GetPayloadResponse) ProtoMessage() {}
 
 func (x *GetPayloadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[4]
+	mi := &file_internal_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -467,7 +551,7 @@ func (x *GetPayloadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPayloadResponse.ProtoReflect.Descriptor instead.
 func (*GetPayloadResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{4}
+	return file_internal_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetPayloadResponse) GetDsn() string {
@@ -495,7 +579,7 @@ type LifecycleEventRequest struct {
 
 func (x *LifecycleEventRequest) Reset() {
 	*x = LifecycleEventRequest{}
-	mi := &file_internal_proto_msgTypes[5]
+	mi := &file_internal_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -507,7 +591,7 @@ func (x *LifecycleEventRequest) String() string {
 func (*LifecycleEventRequest) ProtoMessage() {}
 
 func (x *LifecycleEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[5]
+	mi := &file_internal_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -520,7 +604,7 @@ func (x *LifecycleEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LifecycleEventRequest.ProtoReflect.Descriptor instead.
 func (*LifecycleEventRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{5}
+	return file_internal_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *LifecycleEventRequest) GetId() uint64 {
@@ -552,7 +636,7 @@ type LifecycleEventResponse struct {
 
 func (x *LifecycleEventResponse) Reset() {
 	*x = LifecycleEventResponse{}
-	mi := &file_internal_proto_msgTypes[6]
+	mi := &file_internal_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -564,7 +648,7 @@ func (x *LifecycleEventResponse) String() string {
 func (*LifecycleEventResponse) ProtoMessage() {}
 
 func (x *LifecycleEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[6]
+	mi := &file_internal_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -577,7 +661,7 @@ func (x *LifecycleEventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LifecycleEventResponse.ProtoReflect.Descriptor instead.
 func (*LifecycleEventResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{6}
+	return file_internal_proto_rawDescGZIP(), []int{7}
 }
 
 type RelationElement struct {
@@ -594,7 +678,7 @@ type RelationElement struct {
 
 func (x *RelationElement) Reset() {
 	*x = RelationElement{}
-	mi := &file_internal_proto_msgTypes[7]
+	mi := &file_internal_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -606,7 +690,7 @@ func (x *RelationElement) String() string {
 func (*RelationElement) ProtoMessage() {}
 
 func (x *RelationElement) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[7]
+	mi := &file_internal_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -619,7 +703,7 @@ func (x *RelationElement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RelationElement.ProtoReflect.Descriptor instead.
 func (*RelationElement) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{7}
+	return file_internal_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *RelationElement) GetId() string {
@@ -674,7 +758,7 @@ type TableRelation struct {
 
 func (x *TableRelation) Reset() {
 	*x = TableRelation{}
-	mi := &file_internal_proto_msgTypes[8]
+	mi := &file_internal_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -686,7 +770,7 @@ func (x *TableRelation) String() string {
 func (*TableRelation) ProtoMessage() {}
 
 func (x *TableRelation) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_msgTypes[8]
+	mi := &file_internal_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -699,7 +783,7 @@ func (x *TableRelation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TableRelation.ProtoReflect.Descriptor instead.
 func (*TableRelation) Descriptor() ([]byte, []int) {
-	return file_internal_proto_rawDescGZIP(), []int{8}
+	return file_internal_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *TableRelation) GetSources() []*RelationElement {
@@ -730,7 +814,14 @@ const file_internal_proto_rawDesc = "" +
 	"\x05table\x18\x06 \x01(\tR\x05table\x12\x12\n" +
 	"\x04type\x18\a \x01(\tR\x04type\x12%\n" +
 	"\adb_type\x18\b \x01(\x0e2\f.gnpb.DBTypeR\x06dbType\x12 \n" +
-	"\vdescription\x18\t \x01(\tR\vdescription\"t\n" +
+	"\vdescription\x18\t \x01(\tR\vdescription\"\xa7\x01\n" +
+	"\x0fUnionIdentifier\x12\x12\n" +
+	"\x04host\x18\x01 \x01(\tR\x04host\x12\x12\n" +
+	"\x04port\x18\x02 \x01(\x05R\x04port\x12%\n" +
+	"\adb_type\x18\x03 \x01(\x0e2\f.gnpb.DBTypeR\x06dbType\x12\x17\n" +
+	"\adb_name\x18\x04 \x01(\tR\x06dbName\x12\x16\n" +
+	"\x06schema\x18\x05 \x01(\tR\x06schema\x12\x14\n" +
+	"\x05table\x18\x06 \x01(\tR\x05table\"t\n" +
 	"\x16LineageRelationRequest\x12-\n" +
 	"\asources\x18\x01 \x03(\v2\x13.gnpb.UnionRelationR\asources\x12+\n" +
 	"\x06target\x18\x02 \x01(\v2\x13.gnpb.UnionRelationR\x06target\"\x19\n" +
@@ -803,39 +894,41 @@ func file_internal_proto_rawDescGZIP() []byte {
 }
 
 var file_internal_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_internal_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_internal_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_internal_proto_goTypes = []any{
 	(DBType)(0),                     // 0: gnpb.DBType
 	(RunStatus)(0),                  // 1: gnpb.RunStatus
 	(RelationType)(0),               // 2: gnpb.RelationType
 	(*UnionRelation)(nil),           // 3: gnpb.UnionRelation
-	(*LineageRelationRequest)(nil),  // 4: gnpb.LineageRelationRequest
-	(*LineageRelationResponse)(nil), // 5: gnpb.LineageRelationResponse
-	(*GetPayloadRequest)(nil),       // 6: gnpb.GetPayloadRequest
-	(*GetPayloadResponse)(nil),      // 7: gnpb.GetPayloadResponse
-	(*LifecycleEventRequest)(nil),   // 8: gnpb.LifecycleEventRequest
-	(*LifecycleEventResponse)(nil),  // 9: gnpb.LifecycleEventResponse
-	(*RelationElement)(nil),         // 10: gnpb.RelationElement
-	(*TableRelation)(nil),           // 11: gnpb.TableRelation
+	(*UnionIdentifier)(nil),         // 4: gnpb.UnionIdentifier
+	(*LineageRelationRequest)(nil),  // 5: gnpb.LineageRelationRequest
+	(*LineageRelationResponse)(nil), // 6: gnpb.LineageRelationResponse
+	(*GetPayloadRequest)(nil),       // 7: gnpb.GetPayloadRequest
+	(*GetPayloadResponse)(nil),      // 8: gnpb.GetPayloadResponse
+	(*LifecycleEventRequest)(nil),   // 9: gnpb.LifecycleEventRequest
+	(*LifecycleEventResponse)(nil),  // 10: gnpb.LifecycleEventResponse
+	(*RelationElement)(nil),         // 11: gnpb.RelationElement
+	(*TableRelation)(nil),           // 12: gnpb.TableRelation
 }
 var file_internal_proto_depIdxs = []int32{
 	0,  // 0: gnpb.UnionRelation.db_type:type_name -> gnpb.DBType
-	3,  // 1: gnpb.LineageRelationRequest.sources:type_name -> gnpb.UnionRelation
-	3,  // 2: gnpb.LineageRelationRequest.target:type_name -> gnpb.UnionRelation
-	1,  // 3: gnpb.LifecycleEventRequest.run_status:type_name -> gnpb.RunStatus
-	10, // 4: gnpb.TableRelation.sources:type_name -> gnpb.RelationElement
-	10, // 5: gnpb.TableRelation.targets:type_name -> gnpb.RelationElement
-	6,  // 6: gnpb.InternalService.GetPayload:input_type -> gnpb.GetPayloadRequest
-	8,  // 7: gnpb.InternalService.LifecycleEvent:input_type -> gnpb.LifecycleEventRequest
-	4,  // 8: gnpb.InternalService.LineageRelation:input_type -> gnpb.LineageRelationRequest
-	7,  // 9: gnpb.InternalService.GetPayload:output_type -> gnpb.GetPayloadResponse
-	9,  // 10: gnpb.InternalService.LifecycleEvent:output_type -> gnpb.LifecycleEventResponse
-	5,  // 11: gnpb.InternalService.LineageRelation:output_type -> gnpb.LineageRelationResponse
-	9,  // [9:12] is the sub-list for method output_type
-	6,  // [6:9] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	0,  // 1: gnpb.UnionIdentifier.db_type:type_name -> gnpb.DBType
+	3,  // 2: gnpb.LineageRelationRequest.sources:type_name -> gnpb.UnionRelation
+	3,  // 3: gnpb.LineageRelationRequest.target:type_name -> gnpb.UnionRelation
+	1,  // 4: gnpb.LifecycleEventRequest.run_status:type_name -> gnpb.RunStatus
+	11, // 5: gnpb.TableRelation.sources:type_name -> gnpb.RelationElement
+	11, // 6: gnpb.TableRelation.targets:type_name -> gnpb.RelationElement
+	7,  // 7: gnpb.InternalService.GetPayload:input_type -> gnpb.GetPayloadRequest
+	9,  // 8: gnpb.InternalService.LifecycleEvent:input_type -> gnpb.LifecycleEventRequest
+	5,  // 9: gnpb.InternalService.LineageRelation:input_type -> gnpb.LineageRelationRequest
+	8,  // 10: gnpb.InternalService.GetPayload:output_type -> gnpb.GetPayloadResponse
+	10, // 11: gnpb.InternalService.LifecycleEvent:output_type -> gnpb.LifecycleEventResponse
+	6,  // 12: gnpb.InternalService.LineageRelation:output_type -> gnpb.LineageRelationResponse
+	10, // [10:13] is the sub-list for method output_type
+	7,  // [7:10] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_internal_proto_init() }
@@ -843,14 +936,14 @@ func file_internal_proto_init() {
 	if File_internal_proto != nil {
 		return
 	}
-	file_internal_proto_msgTypes[5].OneofWrappers = []any{}
+	file_internal_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_proto_rawDesc), len(file_internal_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
